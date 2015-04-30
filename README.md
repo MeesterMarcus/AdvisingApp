@@ -1,6 +1,10 @@
 # Section-2-Team-5
 
-Server Setup:
+Server Login:
+
+URL: https://gundam.eu/pma/index.php
+
+Server Setup (Optional):
 
 1. Download and install XAMPP
 2. Start XAMPP control panel

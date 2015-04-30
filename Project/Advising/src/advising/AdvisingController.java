@@ -3,48 +3,54 @@ package advising;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
+/**
+ * This class is a controller for the buttons pressed. Submits student info to
+ * database upon clicking "Submit".
+ * 
+ * @author Marcus Lorenzana
+ *
+ */
 
-public class AdvisingController implements ActionListener {
-	
-	private AdvisingModel model; 
-	private AdvisingView view; 
-	private JButton submitButton; 
-	
-	public AdvisingController(AdvisingModel model, AdvisingView view) {
+public class AdvisingController implements ActionListener, ControllerInterface {
+
+	private AdvisingModelInterface model;
+
+	/**
+	 * Initilaize variables in constructor
+	 * 
+	 * @param model
+	 */
+	public AdvisingController(AdvisingModelInterface model) {
 		this.model = model;
-		this.view = view; 
 	}
-	
 
-	@Override
+	/* (non-Javadoc)
+	 * @see advising.ControllerInterface#actionPerformed(java.awt.event.ActionEvent)
+	 */
 	public void actionPerformed(ActionEvent e) {
-		String command = e.getActionCommand(); 
-		
+
+		String command = e.getActionCommand();
+
+		if (command.equals("Check")) {
+			/*
+			 * For this one we need to do a try catch. But for now, to test,
+			 * enter this as banner id or scan david's card: ;000960991=000311?
+			 */
+			model.check();
+		}
+
 		if (command.equals("Exit")) {
 			System.exit(0);
-		} else if (command.equals("Submit")){
-			Student newStudent = new Student(view.getPersonalInfo()); 
-			model.addStudent(newStudent); 
+		} else if (command.equals("Submit")) {
+			model.submit();
+			System.out.println(); 
+			System.out.println("Submitted:");
 			System.out.println(model); 
-			ClearFields(); 
-			
+			System.out.println(); 
 		}
-		
-	}
-	
 
-	public void ClearFields() {
-		view.bannerField.setText("");
-		view.fNameField.setText("");
-		view.lNameField.setText("");
-		view.dobField.setText("");
-		view.addressField.setText("");
-		view.cityField.setText("");
-		view.stateField.setText("");
-		view.zipField.setText("");
-		view.emailField.setText("");
-		
 	}
+
+	
 
 }
